@@ -6,10 +6,14 @@ def bakPath = file("${buildDir}/bakApk/") //指定基准文件存放位置
 android {
     signingConfigs {
         release {
+            try {
             keyAlias 'TinkerTest'
             keyPassword '15728006854'
             storeFile file('TinkerTest.jks')
             storePassword '15728006854'
+            } catch (ex) {
+                throw new InvalidUserDataException(ex.toString())
+            }
         }
     }
     compileSdkVersion 25
@@ -68,15 +72,23 @@ dependencies {
     //tinker的核心sdk库
     compile("com.tencent.tinker:tinker-android-lib:${TINKER_VERSION}") { changing = true }
     compile 'com.android.support:multidex:1.0.1'
+
+    //以下SDK开发者请根据需要自行选择
+    //bmob-sdk：Bmob的android sdk包，包含了Bmob的数据存储、文件等服务，以下是最新的bmob-sdk:
+    //3.5.5：请务必查看下面注释[1]
+    compile 'cn.bmob.android:bmob-sdk:3.5.5'
+    //如果你想应用能够兼容Android6.0，请添加此依赖(org.apache.http.legacy.jar)
+    compile 'cn.bmob.android:http-legacy:1.0'
+    compile 'com.android.support:support-v4:25.3.1'
 }
 
 
 ext{
     tinkerEnable = true;
-    tinkerOldApkPath = "${bakPath}/app-release-0904-16-09-14.apk"
+    tinkerOldApkPath = "${bakPath}/app-release-0922-13-37-01.apk"
     tinkerID = "1.0"
-    tinkerApplyMappingPath = "${bakPath}/app-release-0904-16-09-14-mapping.txt"
-    tinkerApplyResourcePath = "${bakPath}/app-release-0904-16-09-14-R.txt"
+    tinkerApplyMappingPath = "${bakPath}/app-release-0922-13-37-01-mapping.txt"
+    tinkerApplyResourcePath = "${bakPath}/app-release-0922-13-37-01-R.txt"
 }
 def buildWithTinker(){
     return ext.tinkerEnable

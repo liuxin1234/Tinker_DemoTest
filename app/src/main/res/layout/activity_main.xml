@@ -18,11 +18,7 @@
        android:layout_height="wrap_content"
        android:text="热更新成功"
        android:textSize="20sp"
-       android:textColor="@color/colorAccent"/>
-   <Button
-       android:id="@+id/btn_up"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:text="更新成功后按钮变化了"/>
+       android:textColor="@color/colorPrimary"/>
+
 
 </LinearLayout>
